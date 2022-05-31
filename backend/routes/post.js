@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 
 const router_post = express.Router();
-const filePath = "./../data/beneficiarios.json";
+const filePath = "./data/beneficiarios.json";
 
 router_post.post("/", (req, res) => {
   const body = req.body;

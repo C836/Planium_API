@@ -10,7 +10,7 @@ export function beneficiarios_controller(plans, prices) {
       if (error) return error;
 
       const file = JSON.parse(data),
-        beneficiarios = file.beneficiarios;
+      beneficiarios = file.beneficiarios;
 
       let result = [];
 

@@ -1,1 +1,28 @@
-{ "beneficiarios": [] }
+{
+  "beneficiarios": [
+    {
+      "quantidade": 1,
+      "plano": "reg5",
+      "beneficiario": [
+        { "nome": "Andreia", "idade": 20 },
+        { "nome": "Claudio", "idade": 30 }
+      ]
+    },
+    {
+      "quantidade": 1,
+      "plano": "reg5",
+      "beneficiario": [
+        { "nome": "Andreia", "idade": 20 },
+        { "nome": "Claudio", "idade": 30 }
+      ]
+    },
+    {
+      "quantidade": 1,
+      "plano": "reg5",
+      "beneficiario": [
+        { "nome": "Andreia", "idade": 20 },
+        { "nome": "Claudio", "idade": 30 }
+      ]
+    }
+  ]
+}
