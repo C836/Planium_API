@@ -1,0 +1,25 @@
+{
+  "name": "planium_api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C836/Planium_API.git"
+  },
+  "author": "Gabriel Lopes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/C836/Planium_API/issues"
+  },
+  "homepage": "https://github.com/C836/Planium_API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  }
+}
