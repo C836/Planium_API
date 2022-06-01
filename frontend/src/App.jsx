@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import logo from "./assets/planium.svg";
 import { getData, getPrices } from "./utils/index";
-import { Figure, Img } from "./components/Figure/FigureStyled";
+import { Conteiner } from "./components/Conteiner/Conteiner";
+import { Figure, Img } from "./components/Figure/Figure";
 import {
   Form,
   H1,
@@ -10,17 +11,20 @@ import {
   Label,
   Select,
   Preco,
-} from "./components/Form/FormStyled";
-import { Button } from "./components/Button/ButtonStyled";
+} from "./components/Form/Form";
+import { Button } from "./components/Button/Button";
+import { Ul, Li } from "./components/Registros/Registros";
 
 function App() {
   const [data, setData] = useState([]);
 
-  const [plano, setPlano] = useState([]);
+  const [plano, setPlano] = useState();
   const [preco, setPreco] = useState(0);
   const [idade, setIdade] = useState(0);
 
-  const [registros, setRegistros] = useState([])
+  const [registros, setRegistros] = useState([]);
+
+  const formRef = useRef(null);
 
   useEffect(() => {
     getData().then((res) => setData(res));
@@ -39,8 +43,34 @@ function App() {
     if (e.target.value.length > 0) setPreco(0);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (e.nativeEvent.submitter.value === "adicionar") {
+      adicionar(e.target);
+    } else {
+      finalizar();
+    }
+  };
+
+  const adicionar = (cadastro) => {
+    const usuario = {
+      nome: `${cadastro.nome.value} ${cadastro.sobrenome.value}`,
+      idade: cadastro.idade.value,
+      preco: preco,
+    };
+    setRegistros((registros) => [...registros, usuario]);
+    formRef.current.reset();
+    setPreco(0);
+  };
+
+  const finalizar = () => {
+    console.log("fin");
+  };
+
   function calcularPreco() {
-    if (plano.length && idade > 0) {
+    if (plano && idade > 0) {
       let precos = getPrices(plano, data[0], data[1]);
 
       setPreco(
@@ -55,53 +85,76 @@ function App() {
 
   return (
     <div className="App">
-      <Figure>
-        <Img src={logo} />
-      </Figure>
-      <Form>
-        <H1>Cadastro</H1>
-        <Select
-          defaultValue={"disabled"}
-          name="plano"
-          onChange={handleSelectChange}
-          required
-        >
-          <option value={"disabled"} disabled>
-            Selecione um plano
-          </option>
-          {data[0]?.map((item, index) => (
-            <option key={index} value={item.registro}>
-              {item.nome}
-            </option>
-          ))}
-        </Select>
+      <Conteiner>
+        <Figure>
+          <Img src={logo} />
+        </Figure>
 
-        <Fieldset
-        names>
-          <Label htmlFor="nome">Nome</Label>
-          <Label htmlFor="sobrenome">Sobrenome</Label>
-          <Input name="nome" required />
-          <Input name="sobrenome" required />
-        </Fieldset>
-
-        <Label htmlFor="idade">Idade</Label>
-        <Fieldset section="plans">
-          <Input
-            type={"number"}
-            name="idade"
-            onChange={handleIdadeChange}
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <H1>Cadastro</H1>
+          <Select
+            name="plano"
+            onChange={handleSelectChange}
+            value={plano}
+            multiple={false}
             required
-          />
-          <Button>Adicionar +</Button>
-        </Fieldset>
+            disabled={registros.length > 0 ? true : false}
+          >
+            <option label="Selecione um plano" value={""} />
+            {data[0]?.map((item, index) => (
+              <option key={index} value={item.registro}>
+                {item.nome}
+              </option>
+            ))}
+          </Select>
 
-        <Preco>
-          <p>Valor:</p>
-          <p>R$ {preco}.00</p>
-        </Preco>
+          <Fieldset names>
+            <Label htmlFor="nome">Nome</Label>
+            <Label htmlFor="sobrenome">Sobrenome</Label>
+            <Input name="nome" required />
+            <Input name="sobrenome" required />
+          </Fieldset>
 
-        <Button primary>Finalizar</Button>
-      </Form>
+          <Label htmlFor="idade">Idade</Label>
+          <Fieldset section="plans">
+            <Input
+              type={"number"}
+              name="idade"
+              onChange={handleIdadeChange}
+              required
+            />
+            <Button value={"adicionar"}>Adicionar +</Button>
+          </Fieldset>
+
+          <Preco>
+            <p>Valor {registros.length ? "total" : ""}:</p>
+            <p>
+              R$
+              {registros.length
+                ? registros.reduce(function (previousValue, currentValue) {
+                    return previousValue + currentValue.preco;
+                  }, 0) + preco
+                : preco}
+              .00
+            </p>
+          </Preco>
+
+          <Button value={"finalizar"} primary>
+            Finalizar
+          </Button>
+        </Form>
+
+        <Ul>
+          {registros?.map((reg, index) => (
+            <Li key={index}>
+              <span>
+                {reg.nome}, {reg.idade} anos
+              </span>
+              <span>R${reg.preco}.00</span>
+            </Li>
+          ))}
+        </Ul>
+      </Conteiner>
     </div>
   );
 }

@@ -8,4 +8,10 @@ export const Button = styled.button`
   font-size: 1rem;
   border-radius: .3em;
   height: 3em;
+  cursor: pointer;
+  transition: .2s;
+
+  &:hover{
+      filter: brightness(80%);
+  }
 `;

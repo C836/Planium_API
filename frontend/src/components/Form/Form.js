@@ -37,8 +37,8 @@ export const Label = styled.label`
 export const Fieldset = styled.fieldset`
   width: 100%;
   display: grid;
-  grid-template-columns: ${({names}) => names? '1fr 1fr' : '1fr 5fr'};
-  column-gap: 1em;
+  grid-template-columns: ${({names}) => names? '1fr 1fr' : '1fr 4fr'};
+  column-gap: .7em;
   margin-bottom: 1em;
 `;
 
