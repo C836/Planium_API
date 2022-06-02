@@ -4,8 +4,8 @@ import { readFile } from "../utils/readFile.js";
 
 const router_get = express.Router();
 
-const plans = "./data/plans.json";
-const prices = "./data/prices.json";
+const plans = "./src/data/plans.json";
+const prices = "./src/data/prices.json";
 
 router_get.get("/", (req, res) => {
   readFile(plans, prices, (callback) => {

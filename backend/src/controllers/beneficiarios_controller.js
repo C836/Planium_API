@@ -2,7 +2,7 @@ import fs from "fs";
 import { beneficiario } from "./../models/beneficiario.js";
 import { getPrice } from "../utils/getPrice.js";
 
-const filePath = "./data/beneficiarios.json";
+const filePath = "./src/data/beneficiarios.json";
 
 export function beneficiarios_controller(plans, prices) {
   return new Promise((resolve) => {

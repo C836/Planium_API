@@ -4,12 +4,12 @@ import fs from "fs";
 const router_proposta = express.Router();
 
 const paths = [
-  "./data/plans.json",
-  "./data/prices.json",
-  "./data/beneficiarios.json",
+  "./src/data/plans.json",
+  "./src/data/prices.json",
+  "./src/data/beneficiarios.json",
 ];
 
-const proposta = "./data/proposta.json";
+const proposta = "./src/data/proposta.json";
 
 router_proposta.get("/", (req, res) => {
   let result = [];
