@@ -1,11 +1,9 @@
-export function getPrice(plano, plans, prices){
-    let selecionado = plans.find(obj => {
-        return obj.registro === plano
-    })
+export function getPrice(quant, plano, plans, prices) {
+  let selecionado = plans.find((obj) => {
+    return obj.registro === plano;
+  });
 
-    let precos = prices.find(obj => {
-        return obj.codigo === selecionado.codigo
-    })
-
-    return precos
+  return prices.reverse().filter((item) => {
+    return item.codigo === selecionado.codigo && quant >= item.minimo_vidas
+  })[0]
 }

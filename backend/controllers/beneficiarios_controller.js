@@ -14,10 +14,10 @@ export function beneficiarios_controller(plans, prices) {
 
       let result = [];
 
-      beneficiarios.map((item, index) => {
+      beneficiarios.map((item) => {
         const plano = item.plano;
         const registros = item.beneficiario;
-        const precos = getPrice(plano, plans, prices);
+        let precos = getPrice(registros.length, plano, plans, prices)
 
         result.push(new beneficiario(plano, registros, precos));
       });

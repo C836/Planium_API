@@ -14,11 +14,14 @@ import { Ul, Li } from "./../components/Registros/Registros";
 import { registro } from "./../models/registro";
 
 export default function Registro() {
+  useEffect(() => {
+    getData().then((e) => setData(e));
+  }, []);
+
   const [data, setData] = useState([]);
 
-  const [plano, setPlano] = useState();
-  const [preco, setPreco] = useState(0);
-  const [idade, setIdade] = useState(0);
+  const [cliente, setCliente] = useState({ plano: "", preco: 0, idade: 0 });
+  const { plano, preco, idade } = cliente;
 
   const [registros, setRegistros] = useState([]);
 
@@ -26,12 +29,13 @@ export default function Registro() {
   const [validate, setValidate] = useState(true);
 
   const handleSelectChange = (e) => {
-    setPlano(e.target.value);
+    setCliente((cliente) => ({ ...cliente, plano: e.target.value }));
   };
 
   const handleIdadeChange = (e) => {
-    setIdade(e.target.value);
-    if (e.target.value.length > 0) setPreco(0);
+    setCliente(cliente => ({...cliente, idade: e.target.value}))
+    if (e.target.value.length > 0)
+      setCliente((cliente) => ({ ...cliente, preco: 0 }));
   };
 
   const handleFinalizar = () => {
@@ -57,7 +61,7 @@ export default function Registro() {
       };
 
       setRegistros((registros) => [...registros, usuario]);
-      setPreco(0);
+      setCliente((cliente) => ({ ...cliente, preco: 0 }));
       formRef.current.reset();
     } else {
       const usuario = {
@@ -66,9 +70,14 @@ export default function Registro() {
         preco: preco,
       };
 
-      postApi(new registro(usuario.idade ? registros.concat(usuario) : registros, plano)).then(
+      postApi(
+        new registro(
+          usuario.idade ? registros.concat(usuario) : registros,
+          plano
+        )
+      ).then(
         () => setRegistros([]),
-        setPreco(0),
+        setCliente((cliente) => ({ ...cliente, preco: 0 })),
         formRef.current.reset()
       );
     }
@@ -76,25 +85,24 @@ export default function Registro() {
 
   function calcularPreco() {
     if (plano && idade > 0) {
-      let precos = getPrices(plano, data[0], data[1]);
+      let precos = getPrices(registros.length, plano, data[0], data[1]);
+      console.log(precos);
 
-      setPreco(
-        idade < 18
-          ? precos.faixa1
-          : idade >= 18 && idade <= 40
-          ? precos.faixa2
-          : precos.faixa3
-      );
-    } else setPreco(0);
+      setCliente((cliente) => ({
+        ...cliente,
+        preco:
+          idade < 18
+            ? precos.faixa1
+            : idade >= 18 && idade <= 40
+            ? precos.faixa2
+            : precos.faixa3,
+      }));
+    } else setCliente(cliente => ({...cliente, preco: 0}));
   }
 
   useEffect(() => {
     calcularPreco();
   }, [plano, idade]);
-
-  useEffect(() => {
-    getData().then((e) => setData(e));
-  }, []);
 
   return (
     <>

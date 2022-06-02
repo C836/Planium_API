@@ -9,6 +9,8 @@ export const Beneficiarios = styled.ul`
   margin: 1.2em 0;
   box-sizing: border-box;
   list-style: none;
+  max-height: 500px;
+  overflow-y: scroll;
 `;
 
 export const Cliente = styled.li`
