@@ -1,5 +1,5 @@
-export async function getData() {
-  return fetch("http://localhost:3001/proposta")
+export async function getData(get) {
+  return fetch(`http://localhost:3001/${get ? "get" : "proposta"}`)
     .then((res) => res.json())
     .then((res) => {
       return res;

@@ -1,4 +1,5 @@
 export function getPrices(plano, plans, prices){
+    console.log(plano)
     let selecionado = plans.find(obj => {
         return obj.registro === plano
     })

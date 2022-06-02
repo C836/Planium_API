@@ -1,4 +1,5 @@
 import { getData } from "./getData"
 import { getPrices } from "./getPrices"
+import { postApi } from "./postApi"
 
-export { getData , getPrices }
+export { getData, getPrices, postApi }
