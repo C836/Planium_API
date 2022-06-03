@@ -2,6 +2,17 @@
 
 Sistema de registro e exibição de clientes.
 
+* Instale as dependências do front e back end
+ ~~~
+cd backend
+npm install
+npm start
+-------------
+cd frontend
+npm install 
+npm start
+~~~
+
 ### Rotas
 * #### Front end
     - Registro - http://localhost:3000/
