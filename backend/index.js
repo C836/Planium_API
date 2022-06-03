@@ -1,15 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
-import cors from "cors"
+import cors from "cors";
 
 import router_get from "./src/routes/get.js";
 import router_post from "./src/routes/post.js";
 import router_proposta from "./src/routes/proposta.js";
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3010;
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 
 app.listen(PORT, () => {

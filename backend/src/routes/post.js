@@ -15,11 +15,11 @@ router_post.post("/", (req, res) => {
       file.beneficiarios.push(body);
 
       const json = JSON.stringify(file);
-      fs.writeFile(filePath, json, "utf8", function (err) {
+      fs.writeFile(filePath, json, "utf8", (err) => {
         if (err) {
-          console.log(err);
+          res.send(err);
         } else {
-          res.send("tudo certo")
+          res.send("Atualizado")
         }
       });
     }

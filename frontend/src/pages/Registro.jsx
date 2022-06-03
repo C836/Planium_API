@@ -13,20 +13,20 @@ import { Button } from "./../components/Button/Button";
 import { Ul, Li } from "./../components/Registros/Registros";
 import { registro } from "./../models/registro";
 
-export default function Registro() {
+export default function Registro(props) {
   useEffect(() => {
-    getData().then((e) => setData(e));
+    getData().then((e) => {setData(e), props.setLoading(false)})
   }, []);
 
-  const [data, setData] = useState([]);
+  const [ data, setData ] = useState([]);
 
-  const [cliente, setCliente] = useState({ plano: "", preco: 0, idade: 0 });
+  const [ cliente, setCliente ] = useState({ plano: "", preco: 0, idade: 0 });
   const { plano, preco, idade } = cliente;
 
-  const [registros, setRegistros] = useState([]);
+  const [ registros, setRegistros ] = useState([]);
 
   const formRef = useRef(null);
-  const [validate, setValidate] = useState(true);
+  const [ validate, setValidate ] = useState(true);
 
   const handleSelectChange = (e) => {
     setCliente((cliente) => ({ ...cliente, plano: e.target.value }));
@@ -78,7 +78,8 @@ export default function Registro() {
       ).then(
         () => setRegistros([]),
         setCliente((cliente) => ({ ...cliente, preco: 0 })),
-        formRef.current.reset()
+        formRef.current.reset(),
+        window.location.href = 'http://localhost:3000/results'
       );
     }
   };
@@ -147,7 +148,7 @@ export default function Registro() {
         </Fieldset>
 
         <Preco>
-          <p>Valor {registros.length && "total"}:</p>
+          <p>Valor {registros.length ? "total" : ""}:</p>
           <p>
             R$
             {registros.length

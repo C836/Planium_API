@@ -1,5 +1,6 @@
 export class beneficiario {
   constructor(plano, dados, precos) {
+    this.quantidade = 
     (this.plano = plano),
     (this.beneficiarios = this.calcularRegistros(dados, precos)),
     (this.total = this.calcularTotal());

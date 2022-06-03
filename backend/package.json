@@ -1,12 +1,9 @@
 {
   "name": "planium_api",
   "version": "1.0.0",
-  "description": "",
-  "proxy": "http://localhost:3001",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js",
     "start": "node ./index.js"
   },
   "repository": {

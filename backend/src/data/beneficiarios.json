@@ -1,3 +1,1 @@
-{
-  "beneficiarios": [ ]
-}
+{"beneficiarios":[{"quantidade":1,"plano":"reg3","beneficiario":[{"nome":"Marcos Teixeira","idade":"18"}]},{"quantidade":1,"plano":"reg5","beneficiario":[{"nome":"Gabriel Lopes Teixeira","idade":"30"}]},{"quantidade":2,"plano":"reg6","beneficiario":[{"nome":"Julio Gemeo","idade":"10"},{"nome":"Claudio Silva","idade":"40"}]},{"plano":"reg1","beneficiario":[{"nome":"Marcos","idade":20},{"nome":"Claudio","idade":30},{"nome":"Andreia","idade":40}]},{"quantidade":3,"plano":"reg1","beneficiario":[{"nome":"Marcos","idade":20},{"nome":"Claudio","idade":30},{"nome":"Andreia","idade":40}]}]}

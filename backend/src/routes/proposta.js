@@ -19,7 +19,11 @@ router_proposta.get("/", (req, res) => {
   });
 
   fs.writeFile(proposta, JSON.stringify(result), "utf8", (error, data) => {
-    res.send(result)
+    if (error) {
+      res.send(error);
+    } else {
+      res.send(result);
+    }
   });
 });
 

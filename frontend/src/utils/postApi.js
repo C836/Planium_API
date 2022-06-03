@@ -1,5 +1,5 @@
 export async function postApi(data) {
-  fetch("http://localhost:3001/post", {
+  fetch(`http://localhost:3010/post`, {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json",
@@ -10,5 +10,5 @@ export async function postApi(data) {
     .catch((error) => {
       throw error;
     })
-    .then((data) => console.log("cadastrado"));
+    .then(() => console.log("Cadastrado"));
 }
