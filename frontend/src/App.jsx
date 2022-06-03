@@ -30,7 +30,7 @@ export default function App() {
               path="/"
               element={<Registro setLoading={setLoading} />}
             />
-            <Route exact path="/results" element={<Results />} />
+            <Route exact path="/results" element={<Results  setLoading={setLoading}  />} />
           </Routes>
         </Conteiner>
       </div>

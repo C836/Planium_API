@@ -9,11 +9,11 @@ import {
   Total,
 } from "../components/Beneficiarios/Beneficiarios";
 
-export default function Results() {
+export default function Results(props) {
   const [panel, setPanel] = useState([]);
 
   useEffect(() => {
-    getData("get").then((e) => setPanel(e));
+    getData("get").then((e) => setPanel(e), props.setLoading(false));
   }, []);
 
   return (
